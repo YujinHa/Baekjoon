@@ -1,0 +1,37 @@
+#include<iostream>
+using namespace std;
+
+int main()
+{
+	int num;
+	cin >> num;
+
+	int* Height = new int[num];
+	int check = 0;
+	int min, max, diff = -1;
+
+	for (int i = 0; i < num; i++)
+		cin >> Height[i];
+
+	for (int i = 0; i < num; i++)
+	{
+		if ((Height[i] < Height[i + 1]) && (check == 0))
+		{
+			check = 1;
+			min = i;
+			max = i + 1;
+		}
+		else if ((Height[i] < Height[i + 1]) && (check == 1))
+			max = i + 1;
+		else if ((Height[i] >= Height[i + 1]) && (check == 1))
+		{
+			check = 0;
+			diff = ((diff < Height[max] - Height[min])? Height[max] - Height[min] : diff);
+		}
+	}
+	if (diff > 0)
+		cout << diff;
+	else
+		cout << "0";
+	return 0;
+}
